@@ -7,15 +7,16 @@ import java.util.List;
 public class Puzzle8 {
 
 	
-	static int count(String line){
+	static int count(String tmp){
 		//System.out.println(line);
-		line = line.replaceAll("\\\\x[0-9a-fA-F]{2}", "A");
-		line = line.replaceAll("\\\\\"", "A");
-		line = line.replaceAll("\\\\(\\\\)", "A");
+		String line = tmp.replaceAll("\\\\x[0-9a-fA-F]{2}", "H");
+		line = line.replaceAll("\\\\", "S");
+		line = line.replaceAll("\\\"", "G");
+		//line = line.replaceAll("\\\\(\\\\)", "A");
 		line = line.replaceAll("^\"|\"$", "");
 		
-		//System.out.println(" " +line);
-		return line.length();
+		System.out.println(tmp +" " + tmp.length() + " \t " +line);
+		return line.trim().length();
 	}
 	
 	static class Cumul {
@@ -27,9 +28,9 @@ public class Puzzle8 {
 		List<String> lines = Files.readAllLines(Paths.get(Puzzle2.class.getResource("puzzle8input.txt").toURI()));
 		final Cumul c = new Cumul();
 		
-		lines.forEach(line -> c.a+=line.length());
+		lines.forEach(line -> c.a+=line.trim().length());
 		
-		lines.forEach(line -> c.b+=count(line));
+		lines.forEach(line -> c.b+=count(line.trim()));
 		
 		System.out.println(c.a );
 		System.out.println( c.b);
@@ -39,11 +40,11 @@ public class Puzzle8 {
 		
 		lines.forEach(System.out::println);
 		*/
-		
+		System.out.println("===== " + "\"\"".length());
 		System.out.println(count("\"\""));
 		System.out.println(count("\"abc\""));
 		System.out.println(count("\"aaa\\\"aaa\""));
-		System.out.println(count("\"\\x27\""));
+		System.out.println("\"\\x27\"".length() + "----" + count("\"\\x27\""));
 		//System.out.println("\"\\x27\"".length());
 		
 		//System.out.println(count("\"\\\"\\a\""));
